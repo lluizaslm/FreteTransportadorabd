@@ -1,0 +1,34 @@
+package labdb.freteTransportadora.models;
+
+
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+class Frete {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private double valor;
+
+    @ManyToOne
+    private Cliente cliente;
+
+    @ManyToOne
+    private Veiculo veiculo;
+
+    @ManyToOne
+    private Cidade origem;
+
+    @ManyToOne
+    private Cidade destino;
+
+    @ManyToOne
+    private Funcionario responsavel;
+
+    @OneToMany(mappedBy = "frete")
+    private List<ItemTransporte> itens;
+
+    @ManyToOne
+    private CategoriaFrete categoriaFrete;
+}
