@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-public @Data class TipoVeiculo {
+public @Data class TipoVeiculo implements EntidadeBase {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-public @Data class Distancia {
+public @Data class Distancia implements EntidadeBase {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

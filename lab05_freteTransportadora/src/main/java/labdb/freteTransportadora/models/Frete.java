@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-public @Data class Frete {
+public @Data class Frete implements EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

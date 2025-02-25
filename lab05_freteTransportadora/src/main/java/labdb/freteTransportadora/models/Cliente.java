@@ -5,7 +5,7 @@ import lombok.Data;
 
 
 @Entity
-public @Data class Cliente {
+public @Data class Cliente implements EntidadeBase {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
