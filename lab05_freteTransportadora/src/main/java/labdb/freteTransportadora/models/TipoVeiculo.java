@@ -1,10 +1,12 @@
 package labdb.freteTransportadora.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
 
 @Entity
-class TipoVeiculo {
+public @Data class TipoVeiculo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;

@@ -2,10 +2,12 @@ package labdb.freteTransportadora.models;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
 
 @Entity
-class Frete {
+public @Data class Frete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

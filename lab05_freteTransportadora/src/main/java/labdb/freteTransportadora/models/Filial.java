@@ -1,9 +1,12 @@
 package labdb.freteTransportadora.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
+
 @Entity
-class Filial {
+public @Data class Filial {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
