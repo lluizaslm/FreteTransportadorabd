@@ -1,6 +1,7 @@
 package labdb.freteTransportadora.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import labdb.freteTransportadora.models.EntidadeBase;
 
@@ -25,22 +26,53 @@ class DAOGenerico<T extends EntidadeBase> {
     }
 
     T salvar(T t) {
-        if (Objects.nonNull(t.getId())) {
-            throw new IllegalArgumentException("A entidade já possui um ID. Use atualizar em vez de salvar.");
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            if (Objects.nonNull(t.getId())) {
+                throw new IllegalArgumentException("A entidade já possui um ID. Use atualizar em vez de salvar.");
+            }
+            manager.persist(t);
+            transaction.commit();
+            return t;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        manager.persist(t);
-        return t;
     }
 
     T atualizar(T t) {
-        if (Objects.isNull(t.getId())) {
-            throw new IllegalArgumentException("A entidade não possui um ID. Use salvar em vez de atualizar.");
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            if (Objects.isNull(t.getId())) {
+                throw new IllegalArgumentException("A entidade não possui um ID. Use salvar em vez de atualizar.");
+            }
+            T merged = manager.merge(t);
+            transaction.commit();
+            return merged;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        return manager.merge(t);
     }
 
     void remove(T t) {
-        manager.remove(t);
-        manager.flush();
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            manager.remove(t);
+            manager.flush();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 }
