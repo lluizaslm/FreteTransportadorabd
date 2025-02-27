@@ -2,10 +2,14 @@ package labdb.freteTransportadora.models;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public @Data class Frete implements EntidadeBase {
     @Id
